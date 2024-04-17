@@ -23,6 +23,7 @@ from sisodontorbedent.views import inicio, inicio2
 urlpatterns = [
 
     path('', include(('bases.urls', 'bases'), namespace='bases')),
+    path('inv/', include(('inv.urls', 'inv'), namespace='inv')),
 
     path('admin/', admin.site.urls),
     # path('', inicio, name='Inicio'),  # La ruta raíz ahora renderiza el index.html
