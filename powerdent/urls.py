@@ -1,5 +1,5 @@
 """
-URL configuration for sisodontorbedent project.
+URL configuration for powerdent project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.2/topics/http/urls/
@@ -16,9 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from sisodontorbedent.views import inicio, inicio2
+from powerdent.views import inicio, inicio2
 
-# from sisodontorbedent import inicio, inicio2
+# from powerdent import inicio, inicio2
 
 urlpatterns = [
 
