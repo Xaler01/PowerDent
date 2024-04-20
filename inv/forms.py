@@ -7,8 +7,8 @@ class CategoriaForm(forms.ModelForm):
     class Meta:
         model = Categoria
         fields = ['descripcion', 'estado']
-        labels = {'descripcion': "Descripcion de la categoria",
-                  "estado": "Estado"}
+        labels = {'descripcion': 'Descripcion de la Categoria',
+                  'estado': 'Estado'}
         widget = {'descripcion': forms.TextInput}
 
     def __init__(self, *args, **kwargs):
