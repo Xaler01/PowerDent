@@ -75,7 +75,9 @@
                         <h6 class="collapse-header">Catálogos de Inventario</h6>
                         <a class="collapse-item" href="{% url 'inv:categoria_list' %}">Categorías</a>
                         <a class="collapse-item" href="{% url 'inv:subcategoria_list' %}">Sub Categorías</a>
-                        <!--<a class="collapse-item" href="cards.html">Cards</a>-->
+                        <a class="collapse-item" href="{% url 'inv:marca_list' %}">Marcas</a>
+                        <a class="collapse-item" href="{% url 'inv:um_list' %}">Unidades de Medida</a>
+                        <a class="collapse-item" href="{% url 'inv:producto_list' %}">Productos</a>
                     </div>
                 </div>
             </li>
@@ -136,12 +138,12 @@
                     <span>Charts</span></a>
             </li>-->
 
-            <!-- Nav Item - Tables -->
+            <!-- Nav Item - Tables
             <li class="nav-item">
                 <a class="nav-link" href="#">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Pacientes</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -334,7 +336,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.username }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{% static 'base/img/undraw_profile.svg' %}">
                             </a>
@@ -424,6 +426,8 @@
         </div>
     </div>
 
+    <div class="modal fade" id="popup"></div>
+
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'base/vendor/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'base/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
@@ -439,6 +443,27 @@
     <script src="{% static 'base/vendor/datatables/datatables.bootstrap4.min.js' %}"></script>
 
     {% block js_page %} {% endblock js_page %}
+
+    {% block control_modal %}
+    <script>
+        function abrir_modal(url)
+        {
+            $("#popup").load(url, function(){
+                $(this).modal({
+                    backdrop:'static',
+                    keyboard: false
+                })
+                $(this).modal('show');
+            });
+            return false;
+        }
+        function cerrar_modal()
+        {
+            $("#popup").modal('hide');
+            return false;
+        }
+    </script>
+    {% endblock control_modal %}
 
 </body>
 
