@@ -1,0 +1,105 @@
+<div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <form method="post" role="form"  action="{% if obj %}{% url 'cmp:proveedor_edit' obj.pk %}{% else %}{% url 'cmp:proveedor_new' %}{% endif %}" enctype="multipart/form-data">
+            {% if obj %}
+           <div class="card border-left-warning shadow h-100 py-2">
+           {%else %}
+           <div class="card border-left-success shadow h-100 py-2">
+           {% endif %}
+                <div class="modal-header">
+                    {% if obj %}
+                    <h5 class="modal-title text-xs font-weight-bold text-warning text-uppercase mb-1">Editar Proveedor</h5>
+                    {% else %}
+                    <h5 class="modal-title text-xs font-weight-bold text-success text-uppercase mb-1">Nuevo Proveedor</h5>
+                    {% endif %}
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="row">
+                       <!--{{ form.as_p }} -->
+
+                        <div class="form-group col-md-6">
+                            {{ form.descripcion.label_tag }}
+                            {{ form.descripcion }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            {{ form.contacto.label_tag }}
+                            {{ form.contacto }}
+                        </div>
+                    </div>
+                   <div class="row">
+                        <div class="form-group col-md-6">
+                            {{ form.direccion.label_tag }}
+                            {{ form.direccion }}
+                        </div>
+                         <div class="form-group col-md-6">
+                            {{ form.telefono.label_tag }}
+                            {{ form.telefono }}
+                        </div>
+                   </div>
+                   <div class="row">
+                        <div class="form-group col-md-6">
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group col-md-1">
+                            {{ form.estado.label_tag }}
+                            {{ form.estado }}
+                        </div>
+                   </div>
+                </div>
+
+                <!-- <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="row">
+                       {{ form.as_p }} -->
+                        <!--<div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.descripcion.label_tag }}
+                                {{ form.descripcion }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.direccion.label_tag }}
+                                {{ form.direccion }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.email.label_tag }}
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {{ form.contacto.label_tag }}
+                                {{ form.contacto }}
+                            </div>
+                             <div class="form-group">
+                                {{ form.telefono.label_tag }}
+                                {{ form.telefono }}
+                            </div>
+                            <div class="form-group">
+                                {{ form.estado.label_tag }}
+                                {{ form.estado }}
+                            </div>
+
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-danger" onclick="return cerrar_modal()" data-dismiss="modal">Cancelar</button>
+                </div>
+           </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(function() {
+        $("#id_categoria").val("{{ obj.subcategoria.categoria.id }}").change();
+        $("#id_subcategoria").val("{{ obj.subcategoria.id }}").change();
+        $("#id_subcategoria").chained("#id_categoria");
+    });
+</script>

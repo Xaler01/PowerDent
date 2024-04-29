@@ -25,6 +25,9 @@
     <!-- Custom styles for this template-->
     <link href="{% static 'base/vendor/datatables/datatables.bootstrap4.min.css'%} " rel="stylesheet">
 
+    <!-- Jquery Confirm-->
+    <link rel="stylesheet" href="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.css'%} " >
+
 
 </head>
 
@@ -73,11 +76,30 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Catálogos de Inventario</h6>
-                        <a class="collapse-item" href="{% url 'inv:categoria_list' %}">Categorías</a>
-                        <a class="collapse-item" href="{% url 'inv:subcategoria_list' %}">Sub Categorías</a>
-                        <a class="collapse-item" href="{% url 'inv:marca_list' %}">Marcas</a>
-                        <a class="collapse-item" href="{% url 'inv:um_list' %}">Unidades de Medida</a>
-                        <a class="collapse-item" href="{% url 'inv:producto_list' %}">Productos</a>
+                        {% if perms.inv.view_categoria %}
+                            <a class="collapse-item" href="{% url 'inv:categoria_list' %}">Categorías</a>
+                        {% endif %}
+
+                        {% if perms.inv.view_subcategoria %}
+                            <a class="collapse-item" href="{% url 'inv:subcategoria_list' %}">Sub Categorías</a>
+                        {% endif %}
+
+                        {% if perms.inv.view_marca %}
+                            <a class="collapse-item" href="{% url 'inv:marca_list' %}">Marcas</a>
+                        {% endif %}
+
+                        {% if perms.inv.view_unidadmedida %}
+                            <a class="collapse-item" href="{% url 'inv:um_list' %}">Unidades de Medida</a>
+                        {% endif %}
+
+                        {% if perms.inv.view_producto %}
+                            <a class="collapse-item" href="{% url 'inv:producto_list' %}">Productos</a>
+                        {% endif %}
+
+                            <h6 class="collapse-header">Catálogos de Compras</h6>
+                        {% if perms.cmp.view_proveedor %}
+                            <a class="collapse-item" href="{% url 'cmp:proveedor_list' %}">Proveedores</a>
+                        {% endif %}
                     </div>
                 </div>
             </li>
@@ -441,8 +463,9 @@
     <!-- Page level plugin-->
     <script src="{% static 'base/vendor/datatables/jquery.datatables.min.js' %}"></script>
     <script src="{% static 'base/vendor/datatables/datatables.bootstrap4.min.js' %}"></script>
+    <script src="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.js' %}"></script>
 
-    {% block js_page %} {% endblock js_page %}
+
 
     {% block control_modal %}
     <script>
@@ -462,8 +485,34 @@
             $("#popup").modal('hide');
             return false;
         }
+
+        function mensaje(msg,color='green'){
+
+            if (color=="success")
+            {
+                color="green";
+            }
+            if (color=="error")
+            {
+                color="red";
+            }
+            $.alert({
+                title:'',
+                theme:'material',
+                type:color,
+                content:msg
+            });
+        }
+
+        {% if messages %}
+            {% for message in messages %}
+                //console.log("{{ message.tags }}")
+                mensaje("{{ message }}","{{ message.tags }}");
+            {% endfor %}
+        {% endif %}
     </script>
     {% endblock control_modal %}
+    {% block js_page %} {% endblock js_page %}
 
 </body>
 
