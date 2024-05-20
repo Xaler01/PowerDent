@@ -70,7 +70,6 @@ class SubCategoriaView(SinPrivilegios, generic.ListView):
     context_object_name = "obj"
 
 
-
 class SubCategoriaNew(SuccessMessageMixin, SinPrivilegios, generic.CreateView):
     permission_required = "inv.add_subcategoria"
     model = SubCategoria

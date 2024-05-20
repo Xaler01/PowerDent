@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 from django.views import generic
 
-from .models import Idioma,Frase
+from .models import Idioma, Frase
 
 
 class MixinFormInvalid:
@@ -37,20 +37,19 @@ class Home(LoginRequiredMixin, generic.TemplateView):
 
 class HomeSinPrivilegios(LoginRequiredMixin, generic.TemplateView):
     login_url = "bases:login"
-    template_name="bases/sin_privilegios.html"
+    template_name = "bases/sin_privilegios.html"
 
 
 class IdiomaList(generic.ListView):
     template_name = "bases/idiomas.html"
     model = Idioma
-    context_object_name="obj"
-
+    context_object_namen = "obj"
 
 
 class FraseList(generic.ListView):
     template_name = "bases/frases.html"
     model = Frase
-    context_object_name="obj"
+    context_object_name = "obj"
 
     def get_queryset(self):
         qs = Frase.objects.all()
