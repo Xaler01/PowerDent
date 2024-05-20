@@ -10,7 +10,7 @@
             <div class="dropdown no-arrow">
                 <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-600"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                     aria-labelledby="dropdownMenuLink">
@@ -32,12 +32,12 @@
                     <thead>
                       <th>Sub. Categoria</th>
                       <th>Código</th>
-                      <th>Cod. Barr.</th>
                       <th>Descripcion</th>
                       <th>Existencia</th>
                       <th>Cant. Min.</th>
                       <th>Marca</th>
                       <th>U.M.</th>
+                      <th>Precio</th>
                       <th>Estado</th>
                       <th class="all">Accion</th>
                     </thead>
@@ -46,12 +46,13 @@
                       <tr>
                           <td>{{ item.subcategoria }}</td>
                           <td>{{ item.codigo }}</td>
-                          <td>{{ item.codigo_barra}}</td>
+
                           <td>{{ item.descripcion }}</td>
                           <td>{{ item.existencia }}</td>
                           <td>{{ item.cantidad_minima }}</td>
                           <td>{{ item.marca }}</td>
                           <td>{{ item.unidad_medida }}</td>
+                          <td>${{ item.precio }}</td>
                           <td>{{item.estado|yesno:"Activo,Inactivo"}}</td>
                           <td>
                               <button class="btn btn-warning btn-circle" | onclick="return abrir_modal('{% url 'inv:producto_edit' item.id %}')">

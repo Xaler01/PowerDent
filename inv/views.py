@@ -47,7 +47,6 @@ class CategoriaEdit(SuccessMessageMixin, SinPrivilegios, generic.UpdateView):
     context_object_name = "obj"
     form_class = CategoriaForm
     success_url = reverse_lazy("inv:categoria_list")
-    # login_url = "bases:login"
     success_message = "Categoria actualizada correctamente"
 
     def form_valid(self, form):
@@ -69,17 +68,16 @@ class SubCategoriaView(SinPrivilegios, generic.ListView):
     model = SubCategoria
     template_name = "inv/subcategoria_list.html"
     context_object_name = "obj"
-    # login_url = 'bases:login'
+
 
 
 class SubCategoriaNew(SuccessMessageMixin, SinPrivilegios, generic.CreateView):
-    model = SubCategoria
     permission_required = "inv.add_subcategoria"
+    model = SubCategoria
     template_name = "inv/subcategoria_form.html"
     context_object_name = "obj"
     form_class = SubCategoriaForm
     success_url = reverse_lazy("inv:subcategoria_list")
-    # login_url = "bases:login"
     success_message = "Subcategoria creada correctamente"
 
     def form_valid(self, form):
@@ -112,7 +110,6 @@ class MarcaView(SinPrivilegios, generic.ListView):
     model = Marca
     template_name = "inv/marca_list.html"
     context_object_name = "obj"
-    # login_url = 'bases:login'
 
 
 class MarcaNew(SuccessMessageMixin, SinPrivilegios, generic.CreateView):
@@ -122,7 +119,6 @@ class MarcaNew(SuccessMessageMixin, SinPrivilegios, generic.CreateView):
     context_object_name = "obj"
     form_class = MarcaForm
     success_url = reverse_lazy("inv:marca_list")
-    # login_url = "bases:login"
     success_message = "Marca creada correctamente"
 
     def form_valid(self, form):
@@ -131,12 +127,12 @@ class MarcaNew(SuccessMessageMixin, SinPrivilegios, generic.CreateView):
 
 
 class MarcaEdit(SuccessMessageMixin, SinPrivilegios, generic.UpdateView):
+    permission_required = "inv.change_marca"
     model = Marca
     template_name = "inv/marca_form.html"
     context_object_name = "obj"
     form_class = MarcaForm
     success_url = reverse_lazy("inv:marca_list")
-    # login_url = "bases:login"
     success_message = "Marca editada correctamente"
 
     def form_valid(self, form):
@@ -180,7 +176,6 @@ class UMView(SinPrivilegios, generic.ListView):
     model = UnidadMedida
     template_name = "inv/um_list.html"
     context_object_name = "obj"
-    # login_url = 'bases:login'
 
 
 class UMNew(SuccessMessageMixin, SinPrivilegios, generic.CreateView):

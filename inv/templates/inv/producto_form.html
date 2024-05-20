@@ -72,33 +72,10 @@
                                 {{ form.estado.label_tag }}
                                 {{ form.estado }}
                             </div>
-
-
-
-
-
                             <div class="form-group">
                                 {{ form.categoria.label_tag }}
                                 {{ form.categoria }}
                             </div>
-                            <!--<div class="form-group">
-                                <label for="id_categoria">Categoría</label>
-                                <select name="categoria" id="id_categoria" class="form-control">
-                                    <option value="0">-------</option>
-                                    {% for categoria in categorias %}
-                                        <option value="{{ categoria.id }}">{{ categoria.descripcion }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="id_subcategoria">Subcategoría</label>
-                                <select name="subcategoria" id="id_subcategoria" class="form-control">
-                                    <option value="0">-------</option>
-                                    {% for subcategoria in subcategorias %}
-                                        <option value="{{ subcategoria.id }}" data-chained="{{ subcategoria.categoria.id }}">{{ subcategoria.descripcion }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>-->
                             <div class="form-group">
                                 {{ form.foto.label_tag }}
                                 {{ form.foto }}
