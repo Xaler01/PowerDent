@@ -1,16 +1,18 @@
 from django.shortcuts import render
 from django.views import generic
 from django.urls import reverse_lazy
+import datetime
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.decorators import login_required, permission_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 import json
+from django.db.models import Sum
 
 from .models import Proveedor, ComprasEnc, ComprasDet
-from cmp.forms import ProveedorForm
+from cmp.forms import ProveedorForm, ComprasEncForm
 from bases.views import SinPrivilegios
+from inv.models import Producto
 
 
 # Create your views here.
@@ -82,3 +84,36 @@ class ComprasView(SinPrivilegios, generic.ListView):
     permission_required = "cmp.view_comprasenc"
 
 
+@login_required(login_url='/login/')
+@permission_required('cmp.view_comprasenc', login_url='bases:sin_privilegios')
+def compras(request, compras_id=None):
+    template_name = "cmp/compras.html"
+    prod = Producto.objects.filter(estado=True)
+    form_compras = {}
+    contexto = {}
+
+    if request.method == 'GET':
+        form_compras = ComprasEncForm()
+        enc = ComprasEnc.objects.filter(pk=compras_id).first()
+
+        if enc:
+            det = ComprasDet.objects.filter(compras=enc)
+            fecha_compra = datetime.date.isoformat(enc.fecha_compra)
+            fecha_factura = datetime.date.isoformat(enc.fecha_factura)
+            e = {
+                'fecha_compra': fecha_compra,
+                'proveedor': enc.proveedor,
+                'observacion': enc.observacion,
+                'no_factura': enc.no_factura,
+                'fecha_factura': fecha_factura,
+                'sub_total': enc.sub_total,
+                'descuento': enc.descuento,
+                'total': enc.total
+            }
+
+            form_compras = ComprasEncForm(e)
+        else:
+            det = None
+        contexto = {'productos': prod, 'encabezado': enc, 'detalle': det, 'form_enc': form_compras}
+
+    return render(request, template_name, contexto)
